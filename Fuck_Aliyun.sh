@@ -84,7 +84,7 @@ remove_all_aliyunfiles() {
         systemctl disable cloud-init-upgrade.service
         systemctl stop cloud-init.service
         systemctl disable cloud-init.service
-	rm -fr /usr/sbin/aliyun-service /usr/sbin/aliyun_installer
+        rm -fr /usr/sbin/aliyun-service /usr/sbin/aliyun_installer
         rm /etc/systemd/system/aliyun-util.service
         rm -rf /etc/aliyun-util
         rm /lib/systemd/system/accounts-daemon.service
