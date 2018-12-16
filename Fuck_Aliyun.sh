@@ -94,7 +94,7 @@ remove_all_aliyunfiles() {
         rm /lib/systemd/system/cloud-config.service
         rm /lib/systemd/system/cloud-init-upgrade.service
         rm /lib/systemd/system/cloud-init-local.service
-	find . -name 'aliyun*' -type d -exec rm -rf {} \;
+        find . -name 'aliyun*' -type d -exec rm -rf {} \;
         find . -name 'aliyun*' -type f -exec rm -rf {} \;
         find . -name 'aegis*' -type f -exec rm -rf {} \;
         find . -name 'aegis*' -type d -exec rm -rf {} \;
