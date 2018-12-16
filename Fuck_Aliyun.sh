@@ -107,12 +107,12 @@ ban_server_guard() {
     if [[ ! -n $query_ban ]]; then
         iptables -I INPUT -s 182.92.157.118 -j DROP		
         iptables -I INPUT -s 182.92.69.212 -j DROP
-	iptables -I INPUT -s 182.92.148.207 -j DROP
-	iptables -I INPUT -s 182.92.1.233 -j DROP
-	iptables -I INPUT -s 139.129.192.134 -j DROP
-	iptables -I INPUT -s 139.129.192.106 -j DROP
-	iptables -I INPUT -s 139.129.192.102 -j DROP
-	iptables -I INPUT -s 139.129.99.92 -j DROP
+        iptables -I INPUT -s 182.92.148.207 -j DROP
+        iptables -I INPUT -s 182.92.1.233 -j DROP
+        iptables -I INPUT -s 139.129.192.134 -j DROP
+        iptables -I INPUT -s 139.129.192.106 -j DROP
+        iptables -I INPUT -s 139.129.192.102 -j DROP
+        iptables -I INPUT -s 139.129.99.92 -j DROP
         iptables -I INPUT -s 140.205.201.0/24 -j DROP
         iptables -I INPUT -s 140.205.201.0/28 -j DROP
         iptables -I INPUT -s 140.205.201.16/29 -j DROP
