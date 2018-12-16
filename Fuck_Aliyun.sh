@@ -61,7 +61,7 @@ uninstall_service() {
 agentwatch=`ps aux | grep 'agentwatch'`
 remove_agentwatch() {
     if [[ -n $agentwatch ]]; then
-        systemctl stop agentwatch.service
+       systemctl stop agentwatch.service
 	systemctl disable agentwatch.service
 	find . -name 'agentwatch*' -type d -exec rm -rf {} \; && find . -name 'agentwatch*' -type f -exec rm -rf {} \;
     fi
