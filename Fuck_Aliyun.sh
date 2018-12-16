@@ -3,28 +3,28 @@
 #check linux Gentoo os 
 var=`lsb_release -a | grep Gentoo`
 if [ -z "${var}" ]; then 
-	var=`cat /etc/issue | grep Gentoo`
+    var=`cat /etc/issue | grep Gentoo`
 fi
 
 if [ -d "/etc/runlevels/default" -a -n "${var}" ]; then
-	LINUX_RELEASE="GENTOO"
+    LINUX_RELEASE="GENTOO"
 else
-	LINUX_RELEASE="OTHER"
+    LINUX_RELEASE="OTHER"
 fi
 
 stop_aegis(){
-	killall -9 aegis_cli >/dev/null 2>&1
-	killall -9 aegis_update >/dev/null 2>&1
-	killall -9 aegis_cli >/dev/null 2>&1
-	killall -9 AliYunDun >/dev/null 2>&1
-	killall -9 AliHids >/dev/null 2>&1
-	killall -9 AliYunDunUpdate >/dev/null 2>&1
+    killall -9 aegis_cli >/dev/null 2>&1
+    killall -9 aegis_update >/dev/null 2>&1
+    killall -9 aegis_cli >/dev/null 2>&1
+    killall -9 AliYunDun >/dev/null 2>&1
+    killall -9 AliHids >/dev/null 2>&1
+    killall -9 AliYunDunUpdate >/dev/null 2>&1
     printf "%-40s %40s\n" "Stopping aegis" "[  OK  ]"
 }
 
 stop_quartz(){
-	killall -9 aegis_quartz >/dev/null 2>&1
-        printf "%-40s %40s\n" "Stopping quartz" "[  OK  ]"
+    killall -9 aegis_quartz >/dev/null 2>&1
+    printf "%-40s %40s\n" "Stopping quartz" "[  OK  ]"
 }
 
 remove_aegis_quartz(){
@@ -38,33 +38,33 @@ fi
 
 uninstall_service() {
     if [ -f "/etc/init.d/aegis" ]; then
-	    /etc/init.d/aegis stop  >/dev/null 2>&1
-		rm -f /etc/init.d/aegis 
+        /etc/init.d/aegis stop  >/dev/null 2>&1
+	rm -f /etc/init.d/aegis 
     fi
     if [ $LINUX_RELEASE = "GENTOO" ]; then
-	    rc-update del aegis default 2>/dev/null
-		if [ -f "/etc/runlevels/default/aegis" ]; then
-			rm -f "/etc/runlevels/default/aegis" >/dev/null 2>&1;
-		fi
+        rc-update del aegis default 2>/dev/null
+	if [ -f "/etc/runlevels/default/aegis" ]; then
+            rm -f "/etc/runlevels/default/aegis" >/dev/null 2>&1;
+	fi
     elif [ -f /etc/init.d/aegis ]; then
-         /etc/init.d/aegis  uninstall
-	    for ((var=2; var<=5; var++)) do
-			if [ -d "/etc/rc${var}.d/" ];then
-				 rm -f "/etc/rc${var}.d/S80aegis"
-		    elif [ -d "/etc/rc.d/rc${var}.d" ];then
-				rm -f "/etc/rc.d/rc${var}.d/S80aegis"
-			fi
-		done
+        /etc/init.d/aegis  uninstall
+	for ((var=2; var<=5; var++)) do
+	    if [ -d "/etc/rc${var}.d/" ];then
+	        rm -f "/etc/rc${var}.d/S80aegis"
+            elif [ -d "/etc/rc.d/rc${var}.d" ];then
+		rm -f "/etc/rc.d/rc${var}.d/S80aegis"
+	    fi
+	done
     fi
 }
 
 agentwatch=`ps aux | grep 'agentwatch'`
 remove_agentwatch() {
     if [[ -n $agentwatch ]]; then
-	    systemctl stop agentwatch.service
-		systemctl disable agentwatch.service
-		find . -name 'agentwatch*' -type d -exec rm -rf {} \; && find . -name 'agentwatch*' -type f -exec rm -rf {} \;
-	fi
+        systemctl stop agentwatch.service
+	systemctl disable agentwatch.service
+	find . -name 'agentwatch*' -type d -exec rm -rf {} \; && find . -name 'agentwatch*' -type f -exec rm -rf {} \;
+    fi
 }
 
 aliyunsrv=`ps aux | grep 'aliyun'`
@@ -84,7 +84,7 @@ remove_all_aliyunfiles() {
         systemctl disable cloud-init-upgrade.service
         systemctl stop cloud-init.service
         systemctl disable cloud-init.service
-		rm -fr /usr/sbin/aliyun-service /usr/sbin/aliyun_installer
+	rm -fr /usr/sbin/aliyun-service /usr/sbin/aliyun_installer
         rm /etc/systemd/system/aliyun-util.service
         rm -rf /etc/aliyun-util
         rm /lib/systemd/system/accounts-daemon.service
@@ -94,12 +94,12 @@ remove_all_aliyunfiles() {
         rm /lib/systemd/system/cloud-config.service
         rm /lib/systemd/system/cloud-init-upgrade.service
         rm /lib/systemd/system/cloud-init-local.service
-	    find . -name 'aliyun*' -type d -exec rm -rf {} \;
+	find . -name 'aliyun*' -type d -exec rm -rf {} \;
         find . -name 'aliyun*' -type f -exec rm -rf {} \;
         find . -name 'aegis*' -type f -exec rm -rf {} \;
         find . -name 'aegis*' -type d -exec rm -rf {} \;
-		find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
-	fi
+        find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
+    fi
 }
 
 query_ban=`iptables -L | grep -E '140.205|106.11|140.205'`
