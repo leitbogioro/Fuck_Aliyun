@@ -33,6 +33,7 @@ if [ -d /usr/local/aegis ];then
     rm -rf /usr/local/aegis/aegis_update
     rm -rf /usr/local/aegis/alihids
     rm -rf /usr/local/aegis/aegis_quartz
+    rm -rf /usr/local/aegis
 fi
 }
 
