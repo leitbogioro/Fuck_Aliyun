@@ -100,7 +100,7 @@ CloudMonitorSrv=`ps aux | grep 'cloudmonitor'`
 remove_cloud_monitor() {
     if [[ -n $CloudMonitorSrv ]]; then
         cd /
-	find . -name "cloudmonitor" -type f -print -exec rm -rf {} \;
+	rm -rf /usr/local/cloudmonitor
     fi
 }
 
