@@ -96,6 +96,14 @@ remove_all_aliyunfiles() {
     fi
 }
 
+CloudMonitorSrv=`ps aux | grep 'cloudmonitor'`
+remove_cloud_monitor() {
+    if [[ -n $CloudMonitorSrv ]]; then
+        cd /
+	find . -name "cloudmonitor" -type f -print -exec rm -rf {} \;
+    fi
+}
+
 query_ban=`iptables -L | grep -E '140.205|106.11|140.205'`
 ban_server_guard() {
     if [[ ! -n $query_ban ]]; then
@@ -194,6 +202,7 @@ remove_aegis_quartz
 remove_agentwatch
 remove_all_aliyunfiles
 ban_server_guard
+remove_cloud_monitor
 
 printf "%-40s %40s\n" "Fuck AliYun's monitor done! "
 
