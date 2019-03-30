@@ -91,8 +91,9 @@ remove_all_aliyunfiles() {
 	rm -rf /etc/systemd/system/multi-user.target.wants/aliyun.service
 	
         find . -name "*aliyu*" -type f -print -exec rm -rf {} \;
+	find . -name "*aliyu*" | xargs rm -rf
 	find . -name "*aegis*" -type f -print -exec rm -rf {} \;
-        # find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
+        find . -name "*aegis*" | xargs rm -rf      
     fi
 }
 
