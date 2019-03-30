@@ -70,6 +70,7 @@ remove_agentwatch() {
 aliyunsrv=`ps aux | grep 'aliyun'`
 remove_all_aliyunfiles() {
     if [[ -n $aliyunsrv ]]; then
+        cd /
         systemctl stop accounts-daemon.service
         systemctl disable accounts-daemon.service
         systemctl stop aliyun-util.service
@@ -94,8 +95,7 @@ remove_all_aliyunfiles() {
         rm /lib/systemd/system/cloud-config.service
         rm /lib/systemd/system/cloud-init-upgrade.service
         rm /lib/systemd/system/cloud-init-local.service
-        find . -name 'aliyun*' -type d -exec rm -rf {} \;
-        find . -name 'aliyun*' -type f -exec rm -rf {} \;
+        find . -name "*aliyun*" -type f -print -exec rm -rf {} \;
         find . -name 'aegis*' -type f -exec rm -rf {} \;
         find . -name 'aegis*' -type d -exec rm -rf {} \;
         find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
