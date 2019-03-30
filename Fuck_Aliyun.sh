@@ -28,7 +28,8 @@ stop_quartz(){
 }
 
 remove_aegis_quartz(){
-if [ -d /usr/local/aegis ];then
+if [ -d /usr/local/aegis ]; then
+    umount /usr/local/aegis/aegis_debug
     rm -rf /usr/local/aegis/aegis_client
     rm -rf /usr/local/aegis/aegis_update
     rm -rf /usr/local/aegis/alihids
