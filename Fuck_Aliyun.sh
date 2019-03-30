@@ -29,12 +29,15 @@ stop_quartz(){
 
 remove_aegis_quartz(){
 if [ -d /usr/local/aegis ]; then
+    systemctl stop aegis.service
+    systemctl disable aegis.service
     umount /usr/local/aegis/aegis_debug
     rm -rf /usr/local/aegis/aegis_client
     rm -rf /usr/local/aegis/aegis_update
     rm -rf /usr/local/aegis/alihids
     rm -rf /usr/local/aegis/aegis_quartz
     rm -rf /usr/local/aegis
+    rm -rf /sys/fs/cgroup/devices/system.slice/aegis.service
 fi
 }
 
@@ -75,34 +78,21 @@ aliyunsrv=`ps aux | grep 'aliyun'`
 remove_all_aliyunfiles() {
     if [[ -n $aliyunsrv ]]; then
         cd /
-        systemctl stop accounts-daemon.service
-        systemctl disable accounts-daemon.service
         systemctl stop aliyun-util.service
         systemctl disable aliyun-util.service
-        systemctl stop cloud-config.service
-        systemctl disable cloud-config.service
-        systemctl stop cloud-final.service
-        systemctl disable cloud-final.service
-        systemctl stop cloud-init-local.service
-        systemctl disable cloud-init-local.service
-        systemctl stop cloud-init-upgrade.service
-        systemctl disable cloud-init-upgrade.service
-        systemctl stop cloud-init.service
-        systemctl disable cloud-init.service
+	systemctl stop aliyun.service
+        systemctl disable aliyun.service
+		
         rm -fr /usr/sbin/aliyun-service /usr/sbin/aliyun_installer
         rm /etc/systemd/system/aliyun-util.service
         rm -rf /etc/aliyun-util
-        rm /lib/systemd/system/accounts-daemon.service
-        rm /lib/systemd/system/cloud-final.service
-        rm /lib/systemd/system/cloud-config.target
-        rm /lib/systemd/system/cloud-init.service
-        rm /lib/systemd/system/cloud-config.service
-        rm /lib/systemd/system/cloud-init-upgrade.service
-        rm /lib/systemd/system/cloud-init-local.service
-        find . -name "*aliyun*" -type f -print -exec rm -rf {} \;
-        find . -name 'aegis*' -type f -exec rm -rf {} \;
-        find . -name 'aegis*' -type d -exec rm -rf {} \;
-        find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
+	
+	rm -rf /etc/systemd/system/multi-user.target.wants/ecs_mq.service
+	rm -rf /etc/systemd/system/multi-user.target.wants/aliyun.service
+	
+        find . -name "*aliyu*" -type f -print -exec rm -rf {} \;
+	find . -name "*aegis*" -type f -print -exec rm -rf {} \;
+        # find /etc/systemd/system/ -name 'cloud-*' | xargs rm -rf       
     fi
 }
 
@@ -206,3 +196,7 @@ remove_all_aliyunfiles
 ban_server_guard
 
 printf "%-40s %40s\n" "Fuck AliYun's monitor done! "
+
+echo "Reboot to uninstall completely!"
+
+reboot
