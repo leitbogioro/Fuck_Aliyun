@@ -208,7 +208,9 @@ rescue_localhost_name(){
 }
 
 # Delete welcome message
-sed -e '/*Alibaba*/d' > /etc/motd
+# sed -e '/*Alibaba*/d' > /etc/motd
+rm -rf /etc/motd
+touch /etc/motd
 
 stop_aegis
 umount /usr/local/aegis/aegis_debug
