@@ -199,6 +199,17 @@ ban_server_guard() {
     fi
 }
 
+localIP=$(ip a|grep -w 'inet'|grep 'global'|sed 's/^.*inet //g'|sed 's/\/[0-9][0-9].*$//g')
+rescue_localhost_name(){
+    hostname=$(cat /etc/hostname)
+    echo "" > /etc/hostname
+    echo "localhost" > /etc/hostname
+    sed -i "s/${hostname}/localhost/g" /etc/hosts
+}
+
+# Delete welcome message
+sed -e '/*Alibaba*/d' > /etc/motd
+
 stop_aegis
 umount /usr/local/aegis/aegis_debug
 stop_quartz
@@ -208,10 +219,7 @@ remove_agentwatch
 remove_all_aliyunfiles
 ban_server_guard
 remove_cloud_monitor
-
-sed -e '/*Alibaba*/d' > /etc/motd
-
-localIP=$(ip a|grep -w 'inet'|grep 'global'|sed 's/^.*inet //g'|sed 's/\/[0-9][0-9].*$//g')
+rescue_localhost_name
 
 printf "%-40s %40s\n" "Fuck AliYun's monitor done! "
 
