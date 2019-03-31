@@ -153,6 +153,7 @@ ban_server_guard() {
         iptables -I INPUT -s 120.27.40.113 -j DROP
         iptables -I INPUT -s 120.26.216.168 -j DROP
         iptables -I INPUT -s 120.26.64.126 -j DROP
+	iptables -I INPUT -s 120.26.55.211/32 -j DROP
         iptables -I INPUT -s 115.29.113.101 -j DROP
         iptables -I INPUT -s 115.29.112.222 -j DROP
         iptables -I INPUT -s 115.28.203.70 -j DROP
