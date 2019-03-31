@@ -209,6 +209,10 @@ remove_all_aliyunfiles
 ban_server_guard
 remove_cloud_monitor
 
+sed -e '/*Alibaba*/d' > /etc/motd
+
+localIP=$(ip a|grep -w 'inet'|grep 'global'|sed 's/^.*inet //g'|sed 's/\/[0-9][0-9].*$//g')
+
 printf "%-40s %40s\n" "Fuck AliYun's monitor done! "
 
 echo "Reboot to uninstall completely!"
