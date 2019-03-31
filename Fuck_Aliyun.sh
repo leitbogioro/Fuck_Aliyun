@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
+
 #check linux Gentoo os 
 var=`lsb_release -a | grep Gentoo`
 if [ -z "${var}" ]; then 
@@ -90,10 +92,12 @@ remove_all_aliyunfiles() {
 	rm -rf /etc/systemd/system/multi-user.target.wants/ecs_mq.service
 	rm -rf /etc/systemd/system/multi-user.target.wants/aliyun.service
 	
-        find . -name "*aliyu*" -type f -print -exec rm -rf {} \;
-	find . -name "*aliyu*" | xargs rm -rf
-	find . -name "*aegis*" -type f -print -exec rm -rf {} \;
-        find . -name "*aegis*" | xargs rm -rf      
+        find . -iname "*aliyu*" -type f -print -exec rm -rf {} \;
+	find . -iname "*aliyu*" | xargs rm -rf
+	find . -iname "*aegis*" -type f -print -exec rm -rf {} \;
+        find . -iname "*aegis*" | xargs rm -rf
+	find . -iname "*AliVulfix*" -type f -print -exec rm -rf {} \;
+        find . -iname "*AliVulfix*" | xargs rm -rf
     fi
 }
 
