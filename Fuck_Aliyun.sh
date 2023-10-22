@@ -34,11 +34,7 @@ if [ -d /usr/local/aegis ]; then
     systemctl stop aegis.service
     systemctl disable aegis.service
     umount /usr/local/aegis/aegis_debug
-    rm -rf /usr/local/aegis/aegis_client
-    rm -rf /usr/local/aegis/aegis_update
-    rm -rf /usr/local/aegis/alihids
-    rm -rf /usr/local/aegis/aegis_quartz
-    rm -rf /usr/local/aegis
+    rm -rf /usr/local/aegis/*
     rm -rf /sys/fs/cgroup/devices/system.slice/aegis.service
 fi
 }
