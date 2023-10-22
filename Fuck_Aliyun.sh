@@ -228,5 +228,3 @@ rescue_localhost_name
 printf "%-40s %40s\n" "Fuck AliYun's monitor done! "
 
 echo "Reboot to uninstall completely!"
-
-reboot
