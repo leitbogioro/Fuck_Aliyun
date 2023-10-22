@@ -24,6 +24,9 @@ stop_aegis(){
     killall -9 AliYunDunUpdate >/dev/null 2>&1
     killall -9 assist_daemon >/dev/null 2>&1
     killall -9 assist-daemon >/dev/null 2>&1
+    pkill aliyun* >/dev/null 2>&1
+    pkill AliYunDun* >/dev/null 2>&1
+    pkill aegis* >/dev/null 2>&1
     printf "%-40s %40s\n" "Stopping aegis" "[  OK  ]"
 }
 
@@ -39,6 +42,7 @@ if [ -d /usr/local/aegis ]; then
     umount /usr/local/aegis/aegis_debug
     rm -rf /usr/local/aegis/*
     rm -rf /usr/local/share/assist-daemon/*
+    rm -rf /usr/local/share/aliyun*
     rm -rf /sys/fs/cgroup/devices/system.slice/aegis.service
 fi
 }
