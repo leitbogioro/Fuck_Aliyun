@@ -19,6 +19,7 @@ stop_aegis(){
     killall -9 aegis_update >/dev/null 2>&1
     killall -9 aegis_cli >/dev/null 2>&1
     killall -9 AliYunDun >/dev/null 2>&1
+    killall -9 AliYunDunMonitor >/dev/null 2>&1
     killall -9 AliHids >/dev/null 2>&1
     killall -9 AliYunDunUpdate >/dev/null 2>&1
     printf "%-40s %40s\n" "Stopping aegis" "[  OK  ]"
