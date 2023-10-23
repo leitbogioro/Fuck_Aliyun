@@ -24,6 +24,8 @@ stop_aegis(){
     killall -9 AliYunDunUpdate >/dev/null 2>&1
     killall -9 assist_daemon >/dev/null 2>&1
     killall -9 assist-daemon >/dev/null 2>&1
+    pkill assist_daemon >/dev/null 2>&1
+    pkill assist-daemon >/dev/null 2>&1
     pkill aliyun* >/dev/null 2>&1
     pkill AliYunDun* >/dev/null 2>&1
     pkill aegis* >/dev/null 2>&1
