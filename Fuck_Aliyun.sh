@@ -28,6 +28,7 @@ stop_aegis(){
     pkill assist-daemon >/dev/null 2>&1
     pkill aliyun* >/dev/null 2>&1
     pkill AliYunDun* >/dev/null 2>&1
+    pkill AliSecure* >/dev/null 2>&1
     pkill aegis* >/dev/null 2>&1
     printf "%-40s %40s\n" "Stopping aegis" "[  OK  ]"
 }
