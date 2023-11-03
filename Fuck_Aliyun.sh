@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ $(id -u) != "0" ] && {
+[[ "$EUID" -ne '0' || $(id -u) != '0' ]] && {
 	echo "Error: You must be root to run this script"
 	exit 1
 }
